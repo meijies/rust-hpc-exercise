@@ -9,8 +9,8 @@ edition = "2021"
 rand = "0.8.5"
 
 [dev-dependencies]
-criterion = { version = "0.3.5", features = ["async_tokio", "html_reports"] }
+criterion = { version = "0.3.5", features = ["async_tokio", "html_reports", "real_blackbox"] }
 
 [[bench]]
-name = "hpc_benchmark"
+name = "bench_main"
 harness = false
