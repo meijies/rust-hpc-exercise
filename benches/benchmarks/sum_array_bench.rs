@@ -1,5 +1,8 @@
 use criterion::{black_box, criterion_group, BenchmarkId, Criterion};
-use rust_hpc_exercise::sum_array::{rand_arry, sum_array_with_bit_operator, sum_array_with_branch};
+use rust_hpc_exercise::sum_array::{
+    rand_arry, sum_array_with_bit_operator, sum_array_with_bit_operator_prefetch,
+    sum_array_with_branch,
+};
 
 fn sum_array_with_branch_benchmark(c: &mut Criterion) {
     let unsort_array = rand_arry();
@@ -23,6 +26,15 @@ fn sum_array_with_branch_benchmark(c: &mut Criterion) {
             &threshold,
             |b, threshold| {
                 b.iter(|| sum_array_with_bit_operator(*threshold, black_box(unsort_array)));
+            },
+        );
+        group.bench_with_input(
+            BenchmarkId::new("unsort_bit_operator_prefetch", threshold),
+            &threshold,
+            |b, threshold| {
+                b.iter(|| {
+                    sum_array_with_bit_operator_prefetch(*threshold, black_box(&unsort_array))
+                });
             },
         );
     }
