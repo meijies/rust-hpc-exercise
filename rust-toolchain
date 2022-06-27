@@ -1,1 +1,2 @@
-nightly-2022-06-26
+[toolchain]
+channel = "nightly"

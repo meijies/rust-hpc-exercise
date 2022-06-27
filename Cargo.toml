@@ -10,6 +10,10 @@ rand = "0.8.5"
 
 [dev-dependencies]
 criterion = { version = "0.3.5", features = ["async_tokio", "html_reports", "real_blackbox"] }
+iai = "0.1"
+
+[profile.bench]
+debug = true
 
 [[bench]]
 name = "bench_main"

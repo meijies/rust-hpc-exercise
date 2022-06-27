@@ -1,5 +1,5 @@
-use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
-use rust_hpc_exercise::{rand_arry, sum_array_with_branch};
+use criterion::{black_box, criterion_group, BenchmarkId, Criterion};
+use rust_hpc_exercise::sum_array::{rand_arry, sum_array_with_bit_operator, sum_array_with_branch};
 
 fn sum_array_with_branch_benchmark(c: &mut Criterion) {
     let unsort_array = rand_arry();
@@ -9,17 +9,23 @@ fn sum_array_with_branch_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("sum_array_with_branch");
     for threshold in threshold_array {
         group.bench_with_input(
-            BenchmarkId::new("unsort", threshold),
+            BenchmarkId::new("unsort_branch", threshold),
             &threshold,
             |b, threshold| b.iter(|| sum_array_with_branch(*threshold, black_box(unsort_array))),
         );
         group.bench_with_input(
-            BenchmarkId::new("sort", threshold),
+            BenchmarkId::new("sort_branch", threshold),
             &threshold,
             |b, threshold| b.iter(|| sum_array_with_branch(*threshold, black_box(sort_array))),
+        );
+        group.bench_with_input(
+            BenchmarkId::new("unsort_bit_operator", threshold),
+            &threshold,
+            |b, threshold| {
+                b.iter(|| sum_array_with_bit_operator(*threshold, black_box(unsort_array)));
+            },
         );
     }
 }
 
 criterion_group!(benches, sum_array_with_branch_benchmark);
-criterion_main!(benches);

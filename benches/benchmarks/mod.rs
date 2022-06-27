@@ -1,1 +1,1 @@
-pub mod sum_array;
+pub mod sum_array_bench;
