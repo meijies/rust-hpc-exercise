@@ -3,9 +3,9 @@ use rust_hpc_exercise::sum_array::{rand_arry, sum_array_with_bit_operator, sum_a
 
 fn sum_array_with_branch_benchmark(c: &mut Criterion) {
     let unsort_array = rand_arry();
-    let mut sort_array: [u32; 1000] = rand_arry();
+    let mut sort_array: [i32; 1000] = rand_arry();
     sort_array.sort();
-    let threshold_array: [u32; 9] = [100, 200, 300, 400, 500, 600, 700, 800, 900];
+    let threshold_array: [i32; 9] = [100, 200, 300, 400, 500, 600, 700, 800, 900];
     let mut group = c.benchmark_group("sum_array_with_branch");
     for threshold in threshold_array {
         group.bench_with_input(

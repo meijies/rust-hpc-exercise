@@ -20,3 +20,4 @@ cargo rustc --release --emit asm
 2. [查看 Golang、Lua、JS、Rust、Python等语言生成的汇编代码](https://zhuanlan.zhihu.com/p/77158150)
 3. [Compiler intrinsics](https://doc.rust-lang.org/std/intrinsics/index.html)
 4. [Rust 版本历史](https://rust-lang.github.io/rustup-components-history/)
+5. [工欲性能调优，必先利其器（2）- 火焰图](https://pingcap.com/zh/blog/flame-graph)

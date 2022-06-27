@@ -1,7 +1,7 @@
 use rand::prelude::*;
 
-pub fn rand_arry() -> [u32; 1000] {
-    let mut a: [u32; 1000] = [0; 1000];
+pub fn rand_arry() -> [i32; 1000] {
+    let mut a: [i32; 1000] = [0; 1000];
     let mut rng = thread_rng();
     for i in 0..999 {
         a[i] = rng.gen_range(0..1000);
@@ -9,7 +9,7 @@ pub fn rand_arry() -> [u32; 1000] {
     a
 }
 
-pub fn sum_array_with_branch(threshold: u32, array: [u32; 1000]) -> u32 {
+pub fn sum_array_with_branch(threshold: i32, array: [i32; 1000]) -> i32 {
     let mut sum = 0;
     for item in array {
         if item < threshold {
@@ -19,10 +19,10 @@ pub fn sum_array_with_branch(threshold: u32, array: [u32; 1000]) -> u32 {
     sum
 }
 
-pub fn sum_array_with_bit_operator(threshold: u32, array: [u32; 1000]) -> u32 {
+pub fn sum_array_with_bit_operator(threshold: i32, array: [i32; 1000]) -> i32 {
     let mut sum = 0;
     for item in array {
-        sum += (item - threshold >> 31 - 1) & item;
+        sum += ((item - threshold) >> 31 - 1) & item;
     }
     sum
 }
