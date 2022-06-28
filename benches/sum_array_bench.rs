@@ -1,7 +1,8 @@
+use criterion::criterion_main;
 use criterion::{black_box, criterion_group, BenchmarkId, Criterion};
+use rust_hpc_exercise::rand_arry;
 use rust_hpc_exercise::sum_array::{
-    rand_arry, sum_array_with_bit_operator, sum_array_with_bit_operator_prefetch,
-    sum_array_with_branch,
+    sum_array_with_bit_operator, sum_array_with_bit_operator_prefetch, sum_array_with_branch,
 };
 
 fn sum_array_with_branch_benchmark(c: &mut Criterion) {
@@ -41,3 +42,4 @@ fn sum_array_with_branch_benchmark(c: &mut Criterion) {
 }
 
 criterion_group!(benches, sum_array_with_branch_benchmark);
+criterion_main!(benches);

@@ -70,6 +70,11 @@ dependencies = [
 ]
 
 [[package]]
+name = "core_simd"
+version = "0.1.0"
+source = "git+https://github.com/rust-lang/portable-simd#ed8092e96bb5ad10f7242589f2c263746adafa35"
+
+[[package]]
 name = "criterion"
 version = "0.3.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -513,6 +518,7 @@ checksum = "49b3de9ec5dc0a3417da371aab17d729997c15010e7fd24ff707773a33bddb64"
 name = "rust-hpc-exercise"
 version = "0.1.0"
 dependencies = [
+ "core_simd",
  "criterion",
  "iai",
  "rand",
