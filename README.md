@@ -7,9 +7,11 @@
 ```shell
 cargo bench
 ```
+
 会在 target/criterion/report 目录下生成一个整体的报告 index.html
 
 ### 生成:fire:图
+
 ``` shell
 cargo install flamegraph
 # 将生成一个 flamegraph.svg 图片
@@ -32,3 +34,4 @@ cargo asm rust_hpc_exercise::sum_array::sum_array_with_bit_operator
 3. [Compiler intrinsics](https://doc.rust-lang.org/std/intrinsics/index.html)
 4. [Rust 版本历史](https://rust-lang.github.io/rustup-components-history/)
 5. [工欲性能调优，必先利其器（2）- 火焰图](https://pingcap.com/zh/blog/flame-graph)
+6. [知乎 smcdef 用户的系列文章](https://www.zhihu.com/people/1hdiujw687)
