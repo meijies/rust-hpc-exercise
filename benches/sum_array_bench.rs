@@ -1,6 +1,7 @@
-use criterion::{black_box, criterion_group, BenchmarkId, Criterion};
-use rust_hpc_exercise::sum_array::{rand_arry, sum_array_with_bit_operator, sum_array_with_branch};
 use criterion::criterion_main;
+use criterion::{black_box, criterion_group, BenchmarkId, Criterion};
+use rust_hpc_exercise::rand_arry;
+use rust_hpc_exercise::sum_array::{sum_array_with_bit_operator, sum_array_with_branch};
 
 fn sum_array_with_branch_benchmark(c: &mut Criterion) {
     let unsort_array = rand_arry();

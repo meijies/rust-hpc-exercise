@@ -19,3 +19,7 @@ debug = true
 [[bench]]
 name = "sum_array_bench"
 harness = false
+
+[[bench]]
+name = "cache_associativity_bench"
+harness = false
