@@ -1,8 +1,8 @@
-use criterion::{black_box, criterion_group, criterion_main, Criterion};
+use criterion::{black_box, criterion_group, criterion_main, BenchmarkId, Criterion};
 use rust_hpc_exercise::{
     cache_associativity::{
-        init_array_1, init_array_1_prefetch, init_array_2, init_array_2_prefetch, sum_256_step,
-        sum_257_step,
+        init_array_1, init_array_1_prefetch, init_array_2, init_array_2_prefetch, walk_step,
+        walk_step_prefetch,
     },
     reand_vec,
 };
@@ -10,8 +10,19 @@ use rust_hpc_exercise::{
 fn sum_step_benchmark(c: &mut Criterion) {
     let mut group = c.benchmark_group("sum_step");
     let mut vec = reand_vec(100000);
-    group.bench_function("256", |b| b.iter(|| sum_256_step(black_box(&mut vec))));
-    group.bench_function("257", |b| b.iter(|| sum_257_step(black_box(&mut vec))));
+    let step_array: [usize; 10] = [2, 4, 5, 8, 16, 32, 64, 255, 256, 257];
+    for step in step_array {
+        group.bench_with_input(BenchmarkId::new("walk_step", step), &step, |b, step| {
+            b.iter(|| walk_step(*step, black_box(&mut vec)));
+        });
+        group.bench_with_input(
+            BenchmarkId::new("walk_step_prefech", step),
+            &step,
+            |b, step| {
+                b.iter(|| walk_step_prefetch(*step, black_box(&mut vec)));
+            },
+        );
+    }
 }
 
 fn init_array_benchmark(c: &mut Criterion) {

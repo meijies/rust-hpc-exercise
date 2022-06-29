@@ -2,15 +2,17 @@ use std::intrinsics::prefetch_read_data;
 use std::vec;
 /// sum 256 比 sum 257 慢很多，但它们唯一的区别在于 step，原因和缓存相关.
 /// 具体原因见 https://en.algorithmica.org/hpc/cpu-cache/associativity/
-
-pub fn sum_256_step(vec: &mut vec::Vec<u32>) {
-    for x in vec.iter_mut().step_by(256) {
+pub fn walk_step(step: usize, vec: &mut vec::Vec<u32>) {
+    for x in vec.iter_mut().step_by(step) {
         *x = *x + 1;
     }
 }
-
-pub fn sum_257_step(vec: &mut vec::Vec<u32>) {
-    for x in vec.iter_mut().step_by(257) {
+#[no_mangle]
+pub fn walk_step_prefetch(step: usize, vec: &mut vec::Vec<u32>) {
+    unsafe {
+        prefetch_read_data(vec.as_ptr(), 3);
+    }
+    for x in vec.iter_mut().step_by(step) {
         *x = *x + 1;
     }
 }
